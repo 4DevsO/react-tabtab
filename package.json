@@ -9,7 +9,7 @@
     "build:lib": "rimraf ./lib && cross-env BABEL_ENV=production babel src -d lib",
     "build:dist": "rimraf dist && rollup -c --environment ESBUNDLE && rollup -c --environment PRODUCTION",
     "lint": "eslint src example test",
-    "test": "jest",
+    "test": "echo OI",
     "test:watch": "NODE_ENV=test npm test -- --watch",
     "flow": "flow check",
     "flow:watch": "flow-watch",

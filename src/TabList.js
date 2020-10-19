@@ -36,7 +36,8 @@ const TabListStyle = styled.div`
   white-space: nowrap;
   overflow: hidden;
   width: auto;
-  padding: ${props => getPadding(props)};
+  padding: ${(props) => getPadding(props)};
+  border-bottom: solid 2px #cfcfcf;
 `;
 
 const ListInner = styled.div`
@@ -92,16 +93,17 @@ type Props = {
   customStyle: {
     TabList: () => void,
     Tab: () => void,
-    ActionButton: () => void
+    ActionButton: () => void,
   },
   activeIndex: number,
-  showArrowButton: 'auto' | boolean,
+  showArrowButton: "auto" | boolean,
   showModalButton: number | boolean,
   handleTabChange: (event: any) => void,
   handleTabSequence: (event: any) => void,
   handleEdit: (event: any) => void,
   ExtraButton: React.Element<*>,
-  children: React.ChildrenArray<*>
+  children: React.ChildrenArray<*>,
+  activeColor: string,
 };
 
 type State = {
@@ -274,7 +276,14 @@ export default class TabListComponent extends React.Component<Props, State> {
   }
 
   renderTabs(options?: any = {}, isModal?: boolean) {
-    const {children, activeIndex, handleTabChange, handleEdit, customStyle} = this.props;
+    const {
+      children,
+      activeIndex,
+      handleTabChange,
+      handleEdit,
+      customStyle,
+      activeColor,
+    } = this.props;
     const props = {
       handleTabChange,
       handleEdit,
@@ -284,21 +293,22 @@ export default class TabListComponent extends React.Component<Props, State> {
     if (!isModal) {
       this.tabRefs = [];
     }
-    return React.Children.map(children, (child, index) => (
+    return React.Children.map(children, (child, index) =>
       React.cloneElement(child, {
         key: index,
         active: index === activeIndex,
         index,
         tabIndex: index,
-        ref: node => {
+        activeColor,
+        ref: (node) => {
           if (!isModal && node) {
-            this.tabRefs.push(node)
+            this.tabRefs.push(node);
           }
         },
         ...props,
-        ...options
+        ...options,
       })
-    ));
+    );
   }
 
   renderArrowButton(ScrollButton: React.ComponentType<*>) {
