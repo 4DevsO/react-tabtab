@@ -1,3 +1,7 @@
+# 2.0.1
+
+* Fix problem when the last tab was removed. ([#130](https://github.com/ctxhou/react-tabtab/issues/130), [#114](https://github.com/ctxhou/react-tabtab/issues/114))
+
 # 1.5.0
 
 * Support `AsyncPanel`: can lazy loading panel content
