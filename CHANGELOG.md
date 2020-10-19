@@ -1,3 +1,7 @@
+# 2.2.0
+
+* Add option to pass className to ExtraButton component
+
 # 2.1.0
 
 * Add option to pass custom style to ExtraButton component
