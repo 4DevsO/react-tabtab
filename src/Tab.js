@@ -4,16 +4,21 @@ import styled from 'styled-components';
 import CloseButton from './CloseButton';
 
 const TabStyle = styled.li`
-  display: ${props => props.vertical ? 'block': 'inline-block'};
-  ${props => props.vertical ?
-    `
+  display: ${(props) => (props.vertical ? "block" : "inline-block")};
+  ${(props) =>
+    props.active && `border-bottom: solid 2px ${props.activeColor};`};
+  ${(props) =>
+    props.vertical
+      ? `
       background-color: white;
       color: black;
       padding: 10px 10px;
       z-index: 100000;
     `
-  : props => props.closable ? 'padding: 10px 10px 10px 15px;' : 'padding: 10px 15px;'
-  }
+      : (props) =>
+          props.closable
+            ? "padding: 10px 10px 10px 15px;"
+            : "padding: 10px 15px;"}
 
   user-select: none;
   &:hover {
@@ -59,24 +64,32 @@ export default class Tab extends React.PureComponent<Props> {
   }
 
   render() {
-    const {CustomTabStyle, active, closable, vertical, index} = this.props;
+    const {
+      CustomTabStyle,
+      active,
+      closable,
+      vertical,
+      index,
+      activeColor,
+    } = this.props;
     const TabComponent = CustomTabStyle || TabStyle;
     return (
-      <TabComponent ref={node => this.__INTERNAL_NODE = node}
-                    onClick={this.clickTab}
-                    active={active}
-                    vertical={vertical}
-                    closable={closable}
-                    role="tab"
-                    id={`react-tabtab-tab-${index}`}
-                    aria-controls={`react-tabtab-panel-${index}`}
-                    aria-selected={active}>
+      <TabComponent
+        ref={(node) => (this.__INTERNAL_NODE = node)}
+        onClick={this.clickTab}
+        active={active}
+        vertical={vertical}
+        closable={closable}
+        role="tab"
+        id={`react-tabtab-tab-${index}`}
+        aria-controls={`react-tabtab-panel-${index}`}
+        aria-selected={active}
+        activeColor={activeColor}
+      >
         <TabText>{this.props.children}</TabText>
-        {closable ?
-          <CloseButton handleDelete={this.clickDelete}/>
-        : null}
+        {closable ? <CloseButton handleDelete={this.clickDelete} /> : null}
       </TabComponent>
-    )
+    );
   }
 }
 
