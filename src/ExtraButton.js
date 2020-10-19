@@ -43,9 +43,14 @@ export default class ExtraButton extends React.PureComponent<Props> {
   }
 
   render() {
-    const { disabled, onClick, style } = this.props;
+    const { disabled, onClick, style, className } = this.props;
     return (
-      <Wrapper onClick={onClick} disabled={disabled} style={style}>
+      <Wrapper
+        className={className}
+        onClick={onClick}
+        disabled={disabled}
+        style={style}
+      >
         {this.props.children}
       </Wrapper>
     );
