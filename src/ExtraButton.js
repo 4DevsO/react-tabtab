@@ -33,7 +33,8 @@ const Wrapper = styled.button`
 type Props = {
   onClick: (event: any) => void,
   disabled: boolean,
-  children: React.Node
+  children: React.Node,
+  style: React.StyleHTMLAttributes,
 };
 
 export default class ExtraButton extends React.PureComponent<Props> {
@@ -42,10 +43,10 @@ export default class ExtraButton extends React.PureComponent<Props> {
   }
 
   render() {
-    const {disabled, onClick} = this.props;
+    const { disabled, onClick, style } = this.props;
     return (
-      <Wrapper onClick={onClick} disabled={disabled}>
-        {this.props.children}          
+      <Wrapper onClick={onClick} disabled={disabled} style={style}>
+        {this.props.children}
       </Wrapper>
     );
   }
